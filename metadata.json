@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Gen-Z Hub Auth",
+  "description": "Enemind User Platform, Website-as-a-Service (WaaS) and Google Sheets Database Engine for enemindcompany.co.ke with M-PESA billing and custom domain routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ENEMIND — Global Student & Career Ecosystem",
+  "short_name": "ENEMIND",
+  "description": "Global digital ecosystem for students, graduates, mentors, and educators. Academic marks & GPA, notes, scholarships, career roadmaps, mentorship, campus life TikTok discovery, and automation systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0F172A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/a/ACg8ocK8OcG5hTyHl38gnft2YriG9VXV1g3fxqG25hYEPgzGas3C084=s100-c",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/a/ACg8ocK8OcG5hTyHl38gnft2YriG9VXV1g3fxqG25hYEPgzGas3C084=s100-c",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "EneHub Campus",
+      "short_name": "EneHub",
+      "description": "Open EneHub campus academic & study portal",
+      "url": "/#enehub",
+      "icons": [{ "src": "https://lh3.googleusercontent.com/a/ACg8ocK8OcG5hTyHl38gnft2YriG9VXV1g3fxqG25hYEPgzGas3C084=s100-c", "sizes": "96x96" }]
+    },
+    {
+      "name": "Find Local Hub",
+      "short_name": "Find Local",
+      "description": "Hostels, hotels, tech repairs, barber, and campus clinics",
+      "url": "/#findlocal",
+      "icons": [{ "src": "https://lh3.googleusercontent.com/a/ACg8ocK8OcG5hTyHl38gnft2YriG9VXV1g3fxqG25hYEPgzGas3C084=s100-c", "sizes": "96x96" }]
+    }
+  ]
+}
