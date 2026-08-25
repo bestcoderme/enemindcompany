@@ -57,10 +57,10 @@ interface MentorshipViewProps {
 }
 
 export const MentorshipView: React.FC<MentorshipViewProps> = ({ user: propUser, onNavigate }) => {
-  // Default active user fallback
+  // Active user fallback
   const currentUser: UserProfile = propUser || {
-    name: 'Alex Mwangi',
-    email: 'bluetmobcompany@gmail.com',
+    name: 'Student Scholar',
+    email: 'student@enemindcompany.co.ke',
     avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
     provider: 'google',
     roles: ['STUDENT', 'MENTOR'],

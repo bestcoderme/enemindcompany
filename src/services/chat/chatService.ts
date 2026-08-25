@@ -29,7 +29,7 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
       {
         userId: 'student_current',
         name: 'You',
-        email: 'bluetmobcompany@gmail.com',
+        email: 'student@enemindcompany.co.ke',
         role: 'STUDENT',
         isOnline: true,
       },
@@ -45,7 +45,6 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
     lastMessageAt: '2026-08-25T01:30:00Z',
     lastMessagePreview: 'I have reviewed your GitHub portfolio repository. Excellent architecture on the cloud API!',
     unreadCounts: {
-      'bluetmobcompany@gmail.com': 1,
       student_current: 1,
     },
     createdAt: '2026-08-20T10:00:00Z',
@@ -62,7 +61,7 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
       {
         userId: 'student_current',
         name: 'You',
-        email: 'bluetmobcompany@gmail.com',
+        email: 'student@enemindcompany.co.ke',
         role: 'STUDENT',
         isOnline: true,
       },
@@ -85,7 +84,6 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
     lastMessageAt: '2026-08-24T16:45:00Z',
     lastMessagePreview: 'Remember CAT 2 covers ACID transactions and distributed consensus algorithms this Friday.',
     unreadCounts: {
-      'bluetmobcompany@gmail.com': 0,
       student_current: 0,
     },
     createdAt: '2026-08-15T08:00:00Z',
@@ -102,7 +100,7 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
       {
         userId: 'student_current',
         name: 'You',
-        email: 'bluetmobcompany@gmail.com',
+        email: 'student@enemindcompany.co.ke',
         role: 'STUDENT',
         isOnline: true,
       },
@@ -118,7 +116,6 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
     lastMessageAt: '2026-08-24T11:20:00Z',
     lastMessagePreview: 'Thank you for your purchase! Here is the direct link to create a copy in your Google Drive.',
     unreadCounts: {
-      'bluetmobcompany@gmail.com': 0,
       student_current: 0,
     },
     createdAt: '2026-08-24T11:00:00Z',
@@ -135,7 +132,7 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
       {
         userId: 'student_current',
         name: 'You',
-        email: 'bluetmobcompany@gmail.com',
+        email: 'student@enemindcompany.co.ke',
         role: 'STUDENT',
         isOnline: true,
       },
@@ -151,7 +148,6 @@ export const INITIAL_CONVERSATIONS: Conversation[] = [
     lastMessageAt: '2026-08-23T14:10:00Z',
     lastMessagePreview: 'Your student account trial pass is active. Reach out anytime if you need help!',
     unreadCounts: {
-      'bluetmobcompany@gmail.com': 0,
       student_current: 0,
     },
     createdAt: '2026-08-23T14:00:00Z',
@@ -270,7 +266,6 @@ export class ChatService {
         p.userId.toLowerCase() === cleanId ||
         p.email.toLowerCase() === cleanId ||
         cleanId === 'student_current' ||
-        cleanId === 'bluetmobcompany@gmail.com' ||
         p.userId === 'student_current'
     );
   }

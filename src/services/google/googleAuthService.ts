@@ -4,6 +4,7 @@
  */
 
 import { GoogleAccountInfo } from '../../types/google';
+import { authService } from '../auth/authService';
 
 declare global {
   interface Window {
@@ -181,14 +182,15 @@ class GoogleAuthService {
                 const newlyGranted = (res.scope || scopeString).split(' ');
                 newlyGranted.forEach((s) => this.grantedScopes.add(s));
 
-                const email = userEmail || this.accountInfo?.email || 'bluetmobcompany@gmail.com';
+                const currentAuthUser = authService.getCurrentUser();
+                const email = userEmail || this.accountInfo?.email || currentAuthUser?.email || 'user@enemindcompany.co.ke';
                 const isWorkspace = email.endsWith('@enemind.org') || email.includes('corp') || email.includes('.edu');
 
                 this.accountInfo = {
                   isConnected: true,
                   email,
-                  name: this.accountInfo?.name || email.split('@')[0],
-                  picture: this.accountInfo?.picture || undefined,
+                  name: currentAuthUser?.name || this.accountInfo?.name || email.split('@')[0],
+                  picture: currentAuthUser?.avatarUrl || this.accountInfo?.picture || undefined,
                   scopes: Array.from(this.grantedScopes),
                   tokenExpiry: new Date(this.tokenExpiry).toISOString(),
                   lastSyncTimestamp: new Date().toISOString(),
@@ -226,13 +228,15 @@ class GoogleAuthService {
     this.tokenExpiry = Date.now() + 3600 * 1000 * 24;
     scopes.forEach((s) => this.grantedScopes.add(s));
 
-    const email = userEmail || this.accountInfo?.email || 'bluetmobcompany@gmail.com';
+    const currentAuthUser = authService.getCurrentUser();
+    const email = userEmail || this.accountInfo?.email || currentAuthUser?.email || 'user@enemindcompany.co.ke';
     const isWorkspace = email.endsWith('@enemind.org') || email.includes('.edu') || email.includes('campus');
 
     this.accountInfo = {
       isConnected: true,
       email,
-      name: email.split('@')[0],
+      name: currentAuthUser?.name || this.accountInfo?.name || email.split('@')[0],
+      picture: currentAuthUser?.avatarUrl || this.accountInfo?.picture || undefined,
       scopes: Array.from(this.grantedScopes),
       tokenExpiry: new Date(this.tokenExpiry).toISOString(),
       lastSyncTimestamp: new Date().toISOString(),

@@ -95,10 +95,10 @@ export const CompleteProfileModal: React.FC<CompleteProfileModalProps> = ({
   const calculateCompleteness = () => {
     let score = 0;
     if (name.trim()) score += 20;
-    if (user.email) score += 20;
-    if (avatarUrl && !avatarUrl.includes('placeholder') && !avatarUrl.includes('dicebear') || avatarUrl.length > 30) score += 25;
+    if (user?.email) score += 20;
+    if ((avatarUrl && !avatarUrl.includes('placeholder') && !avatarUrl.includes('dicebear')) || (avatarUrl && avatarUrl.length > 30)) score += 25;
     if (phoneNumberInput.trim().length >= 6) score += 25;
-    if (user.university && user.course) score += 10;
+    if (user?.university && user?.course) score += 10;
     return Math.min(100, score);
   };
 

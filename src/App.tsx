@@ -27,14 +27,16 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => authService.getCurrentUser());
   const [flowStep, setFlowStep] = useState<FlowStep>(() => {
     const existing = authService.getCurrentUser();
-    if (existing && existing.university && existing.course) {
+    if (!existing) {
+      return 'auth';
+    }
+    if (existing.university && existing.course) {
       return 'dashboard';
-    } else if (existing && existing.university) {
+    } else if (existing.university) {
       return 'course';
-    } else if (existing) {
+    } else {
       return 'university';
     }
-    return 'dashboard';
   });
 
   const handlePreloaderComplete = useCallback(() => {

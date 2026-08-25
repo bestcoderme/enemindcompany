@@ -22,9 +22,9 @@ const BOOKINGS_STORAGE_KEY = 'enemind_mentorship_bookings_v1';
 export const INITIAL_BOOKINGS: Booking[] = [
   {
     id: 'book_initial_1',
-    studentId: 'stud_alex_01',
-    studentName: 'Alex Mwangi',
-    studentEmail: 'bluetmobcompany@gmail.com',
+    studentId: 'stud_sample_01',
+    studentName: 'Student Scholar',
+    studentEmail: 'student@enemindcompany.co.ke',
     studentAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
     providerId: 'mentor_dr_jane',
     providerType: 'MENTOR',
@@ -120,7 +120,6 @@ export class BookingService {
       (b) =>
         b.studentEmail.toLowerCase() === clean ||
         b.studentId.toLowerCase() === clean ||
-        clean === 'bluetmobcompany@gmail.com' ||
         clean === 'student_current'
     );
   }

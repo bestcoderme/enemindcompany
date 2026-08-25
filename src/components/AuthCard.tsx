@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Eye, EyeOff, Check, AlertCircle } from 'lucide-react';
 import { GoogleButton } from './GoogleButton';
 import { ForgotPasswordModal } from './ForgotPasswordModal';
+import { GoogleEmailModal } from './GoogleEmailModal';
 import { AuthMode, UserProfile } from '../types';
 
 interface AuthCardProps {
@@ -24,6 +25,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
 
   // Password strength calculation
   const getPasswordStrength = () => {
@@ -64,21 +66,65 @@ export const AuthCard: React.FC<AuthCardProps> = ({
         avatarUrl: logoUrl,
         provider: 'email',
       });
-    }, 1000);
+    }, 800);
   };
 
   const handleGoogleSignIn = () => {
     setIsGoogleLoading(true);
     setErrorMessage('');
-    setTimeout(() => {
-      setIsGoogleLoading(false);
-      onSuccess({
-        name: 'Gen-Z Scholar',
-        email: 'scholar@genzhub.com',
-        avatarUrl: logoUrl,
-        provider: 'google',
-      });
-    }, 1200);
+
+    // Check if Google GSI client library is active
+    if (typeof window !== 'undefined' && window.google?.accounts?.oauth2) {
+      try {
+        const client = window.google.accounts.oauth2.initTokenClient({
+          client_id: '97948383626-gen-lang-client-enemind.apps.googleusercontent.com',
+          scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+          callback: async (res) => {
+            setIsGoogleLoading(false);
+            if (res.access_token) {
+              try {
+                const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                  headers: { Authorization: `Bearer ${res.access_token}` },
+                });
+                if (response.ok) {
+                  const data = await response.json();
+                  onSuccess({
+                    name: data.name || data.email.split('@')[0],
+                    email: data.email,
+                    avatarUrl: data.picture || logoUrl,
+                    provider: 'google',
+                  });
+                  return;
+                }
+              } catch (e) {
+                console.warn('Error fetching Google profile:', e);
+              }
+            }
+            setIsGoogleModalOpen(true);
+          },
+          error_callback: () => {
+            setIsGoogleLoading(false);
+            setIsGoogleModalOpen(true);
+          },
+        });
+        client.requestAccessToken({ prompt: 'select_account' });
+        return;
+      } catch (err) {
+        console.warn('GSI Token request failed, opening direct prompt:', err);
+      }
+    }
+
+    setIsGoogleLoading(false);
+    setIsGoogleModalOpen(true);
+  };
+
+  const handleGoogleModalConfirm = (data: { email: string; name: string }) => {
+    onSuccess({
+      name: data.name,
+      email: data.email,
+      avatarUrl: logoUrl,
+      provider: 'google',
+    });
   };
 
   return (
@@ -371,6 +417,13 @@ export const AuthCard: React.FC<AuthCardProps> = ({
         isOpen={isForgotModalOpen}
         onClose={() => setIsForgotModalOpen(false)}
         initialEmail={email}
+      />
+
+      {/* Google Email Input Dialog */}
+      <GoogleEmailModal
+        isOpen={isGoogleModalOpen}
+        onClose={() => setIsGoogleModalOpen(false)}
+        onConfirm={handleGoogleModalConfirm}
       />
     </>
   );

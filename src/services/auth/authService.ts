@@ -46,15 +46,9 @@ export const authService = {
       if (stored) {
         return JSON.parse(stored) as UserProfile;
       }
-      // Provide default active profile on first visit so preview renders instantly
-      const loggedOutFlag = localStorage.getItem('enemind_logged_out');
-      if (!loggedOutFlag) {
-        this.saveUser(DEFAULT_STUDENT_USER);
-        return DEFAULT_STUDENT_USER;
-      }
       return null;
     } catch {
-      return DEFAULT_STUDENT_USER;
+      return null;
     }
   },
 
